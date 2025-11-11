@@ -17,7 +17,7 @@ pip install -r requirements.txt
 python model.py --data-dir ./Test2 --out-dir ./results
 ```
 
-# Folder Structure
+## Folder Structure
 ```
 model_building/
 ├── model.py
