@@ -16,3 +16,28 @@ pip install -r requirements.txt
 ```bash
 python model.py --data-dir ./Test2 --out-dir ./results
 ```
+
+# Folder Structure
+```
+model_building/
+├── model.py
+├── requirements.txt
+├── Test2/
+│ ├── BC1_trad_homogenous_2023Nov14_MASKED_new1.csv
+│ ├── BC1_trad_homogenous_2023Nov14_MASKED_new2.csv
+│ ├── BC1_trad_homogenous_2023Nov14_MASKED_new3.csv
+│ ├── BC1_trad_homogenous_2023Nov14_MASKED_new4.csv
+│ ├── BC1_trad_homogenous_2023Nov14_MASKED_new5.csv
+│ └── BC1_trad_homogenous_2023Nov14_MASKED_new6.csv
+├── results/
+│ ├── best_model.pkl
+│ ├── model_dashboard.png
+│ ├── model_metrics.csv
+│ ├── performance_by_segment_time.csv
+│ ├── performance_by_time.csv
+│ ├── plot_01_model_comparison_auc.png
+│ ├── ......
+│ └── summary.txt
+└── README.md
+```
+
