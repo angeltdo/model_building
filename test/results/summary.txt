@@ -1,0 +1,157 @@
+(test) [anhthud@node0008 test]$ python model.py --data-dir ./Test2 --out-dir ./results
+====================================================================================================
+MODEL BUILDING CHALLENGE
+====================================================================================================
+
+[1] Loading and merging data...
+Found 6 CSV files
+Loaded ./Test2/BC1_trad_homogenous_2023Nov14_MASKED_new1.csv: 252371 rows, 24 columns
+Loaded ./Test2/BC1_trad_homogenous_2023Nov14_MASKED_new2.csv: 252371 rows, 24 columns
+Loaded ./Test2/BC1_trad_homogenous_2023Nov14_MASKED_new3.csv: 252371 rows, 24 columns
+Loaded ./Test2/BC1_trad_homogenous_2023Nov14_MASKED_new4.csv: 252371 rows, 24 columns
+Loaded ./Test2/BC1_trad_homogenous_2023Nov14_MASKED_new5.csv: 252371 rows, 24 columns
+Loaded ./Test2/BC1_trad_homogenous_2023Nov14_MASKED_new6.csv: 252367 rows, 24 columns
+
+Merged dataset: 1514222 rows, 24 columns
+
+[2] Features engineering...
+  ✓ Total features: 34
+
+[3] Splitting data...
+  Build set: 1,158,732 rows (2018-04-01 00:00:00 to 2022-04-01 00:00:00)
+  Holdout set: 355,490 rows (2022-05-01 00:00:00 to 2023-04-01 00:00:00)
+  Train set: 926,985 rows
+  Validation set: 231,747 rows
+  Features used: 29
+
+[4] Defining models...
+  ✓ Total models: 5
+
+[5] Training all models...
+
+  Training Logistic Regression...
+    Train AUC: 0.7413 | Val AUC: 0.6666
+    Train Acc: 0.9479 | Val Acc: 0.9384
+    ✓ Saved: ./results/Logistic_Regression_model.pkl
+
+  Training Random Forest...
+    Train AUC: 0.7839 | Val AUC: 0.7078
+    Train Acc: 0.9480 | Val Acc: 0.9392
+    ✓ Saved: ./results/Random_Forest_model.pkl
+
+  Training HistGradientBoosting...
+    Train AUC: 0.7766 | Val AUC: 0.7134
+    Train Acc: 0.9480 | Val Acc: 0.9392
+    ✓ Saved: ./results/HistGradientBoosting_model.pkl
+
+  Training LightGBM...
+    Train AUC: 0.7664 | Val AUC: 0.7115
+    Train Acc: 0.9480 | Val Acc: 0.9392
+    ✓ Saved: ./results/LightGBM_model.pkl
+
+  Training XGBoost...
+    Train AUC: 0.7922 | Val AUC: 0.7148
+    Train Acc: 0.9481 | Val Acc: 0.9391
+    ✓ Saved: ./results/XGBoost_model.pkl
+
+[6] Selecting best model based on validation AUC...
+  ✓ Best model: XGBoost
+  ✓ Validation AUC: 0.7148
+  ✓ Saved best model: ./results/best_model.pkl
+
+[7] Evaluating all models on holdout set...
+  Logistic Regression: AUC=0.6779, Acc=0.9628
+  Random Forest: AUC=0.6880, Acc=0.9663
+  HistGradientBoosting: AUC=0.6983, Acc=0.9662
+  LightGBM: AUC=0.6941, Acc=0.9663
+  XGBoost: AUC=0.6984, Acc=0.9662
+
+[8] Creating metrics table...
+  ✓ Saved: ./results/model_metrics.csv
+
+====================================================================================================
+MODEL PERFORMANCE METRICS
+====================================================================================================
+               Model  Train_AUC  Val_AUC  Holdout_AUC  Train_Accuracy  Val_Accuracy  Holdout_Accuracy
+             XGBoost   0.792163 0.714811     0.698428        0.948081      0.939128          0.966159
+HistGradientBoosting   0.776566 0.713444     0.698321        0.948009      0.939188          0.966241
+            LightGBM   0.766401 0.711470     0.694144        0.947968      0.939201          0.966269
+       Random Forest   0.783889 0.707824     0.687978        0.947970      0.939192          0.966269
+ Logistic Regression   0.741349 0.666598     0.677898        0.947918      0.938411          0.962778
+====================================================================================================
+
+[9] Evaluating performance over time (Date_ym)...
+  ✓ Saved: ./results/performance_by_time.csv
+  Mean AUC over time: 0.6999
+  Std AUC over time: 0.0144
+
+[10] Evaluating performance by Segment × Date_ym...
+  ✓ Saved: ./results/performance_by_segment_time.csv
+
+  Performance by Segment:
+             mean       std       min       max
+Segment                                        
+0-500    0.686076  0.053278  0.583643  0.770361
+1K-2K    0.698169  0.022711  0.654440  0.749003
+2K-InfK  0.674488  0.046659  0.593954  0.747961
+500-1K   0.702310  0.016280  0.683671  0.742030
+
+[11] Creating individual plots...
+  ✓ Saved: plot_01_model_comparison_auc.png
+  ✓ Saved: plot_02_model_comparison_accuracy.png
+  ✓ Saved: plot_03_auc_over_time.png
+  ✓ Saved: plot_04_auc_segment_time_heatmap.png
+  ✓ Saved: plot_05_roc_curves.png
+  ✓ Saved: plot_06_precision_recall_curves.png
+  ✓ Saved: plot_07_accuracy_over_time.png
+  ✓ Saved: plot_08_accuracy_segment_time_heatmap.png
+
+[12] Creating dashboard...
+  ✓ Saved: model_dashboard.png
+
+====================================================================================================
+MODEL BUILDING COMPLETE!
+====================================================================================================
+
+Best Model: XGBoost
+  Validation AUC: 0.7148
+  Holdout AUC: 0.6984
+  Temporal Stability (std): 0.0144
+
+All Model Performance (Holdout AUC):
+  XGBoost: 0.6984
+  HistGradientBoosting: 0.6983
+  LightGBM: 0.6941
+  Random Forest: 0.6880
+  Logistic Regression: 0.6779
+
+Outputs saved to: ./results/
+
+Generated files:
+  Models:
+    - Logistic_Regression_model.pkl
+    - Random_Forest_model.pkl
+    - HistGradientBoosting_model.pkl
+    - LightGBM_model.pkl
+    - XGBoost_model.pkl
+    - best_model.pkl (XGBoost)
+
+  Metrics:
+    - model_metrics.csv
+    - performance_by_time.csv
+    - performance_by_segment_time.csv
+
+  Plots:
+    - plot_01_*.png
+    - plot_02_*.png
+    - plot_03_*.png
+    - plot_04_*.png
+    - plot_05_*.png
+    - plot_06_*.png
+    - plot_07_*.png
+    - plot_08_*.png
+    - model_dashboard.png
+
+====================================================================================================
+SUCCESS! All models trained and evaluated.
+====================================================================================================
